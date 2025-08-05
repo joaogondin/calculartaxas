@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calculadora de Taxas - Maquininha</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
@@ -19,7 +16,6 @@
       align-items: center;
       min-height: 100vh;
     }
-
     .container {
       background-color: #ffffff;
       padding: 25px 20px;
@@ -28,14 +24,12 @@
       max-width: 420px;
       width: 100%;
     }
-
     h2 {
       text-align: center;
       color: #00796b;
       margin-bottom: 25px;
       font-size: 1.5em;
     }
-
     label {
       font-weight: bold;
       margin-top: 15px;
@@ -43,7 +37,6 @@
       color: #333;
       font-size: 0.95em;
     }
-
     select, input {
       padding: 12px;
       border-radius: 8px;
@@ -52,139 +45,196 @@
       width: 100%;
       font-size: 1em;
     }
-
     input[readonly] {
       background-color: #f5f5f5;
       color: #333;
     }
-
     .footer {
       text-align: center;
       margin-top: 20px;
       font-size: 0.8em;
       color: #999;
     }
-
     @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      .container {
-        padding: 20px 15px;
-      }
-
-      h2 {
-        font-size: 1.3em;
-      }
-
-      label {
-        font-size: 0.9em;
-      }
-
-      select, input {
-        font-size: 0.95em;
-      }
-
-      .footer {
-        font-size: 0.75em;
-      }
+      body { padding: 10px; }
+      .container { padding: 20px 15px; }
+      h2 { font-size: 1.3em; }
+      label { font-size: 0.9em; }
+      select, input { font-size: 0.95em; }
+      .footer { font-size: 0.75em; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Calculadora de Taxas</h2>
+<div class="container">
+  <h2>Calculadora de Taxas</h2>
 
-    <label for="tipo">Tipo de pagamento:</label>
-    <select id="tipo">
-      <option value="debito">Débito</option>
-      <option value="credito">Crédito</option>
-    </select>
+  <label for="bandeira">Bandeira do Cartão:</label>
+  <select id="bandeira">
+    <option value="master">Master</option>
+    <option value="visa">Visa</option>
+    <option value="elo">Elo</option>
+    <option value="amex">Amex</option>
+  </select>
 
-    <label for="parcelas">Parcelamento (apenas crédito):</label>
-    <select id="parcelas">
-      <option value="1">1x</option>
-      <option value="2">2x</option>
-      <option value="3">3x</option>
-      <option value="4">4x</option>
-      <option value="5">5x</option>
-      <option value="6">6x</option>
-      <option value="7">7x</option>
-      <option value="8">8x</option>
-      <option value="9">9x</option>
-      <option value="10">10x</option>
-      <option value="11">11x</option>
-      <option value="12">12x</option>
-    </select>
+  <label for="tipo">Tipo de pagamento:</label>
+  <select id="tipo">
+    <option value="debito">Débito</option>
+    <option value="credito">Crédito</option>
+  </select>
 
-    <label for="taxa">Taxa de Juros (%):</label>
-    <input type="text" id="taxa" readonly>
+  <label for="parcelas">Parcelamento (apenas crédito):</label>
+  <select id="parcelas">
+    <option value="1">1x</option>
+    <option value="2">2x</option>
+    <option value="3">3x</option>
+    <option value="4">4x</option>
+    <option value="5">5x</option>
+    <option value="6">6x</option>
+    <option value="7">7x</option>
+    <option value="8">8x</option>
+    <option value="9">9x</option>
+    <option value="10">10x</option>
+    <option value="11">11x</option>
+    <option value="12">12x</option>
+  </select>
 
-    <label for="valorDesejado">Valor que deseja receber (R$):</label>
-    <input type="number" id="valorDesejado" min="0" step="0.01">
+  <label for="taxa">Taxa de Juros (%):</label>
+  <input type="text" id="taxa" readonly>
 
-    <label for="valorCobrar">Valor a cobrar do cliente (R$):</label>
-    <input type="text" id="valorCobrar" readonly>
+  <label for="valorDesejado">Valor que deseja receber (R$):</label>
+  <input type="number" id="valorDesejado" min="0" step="0.01">
 
-    <div class="footer">Desenvolvido por Kaialla Requião 💳</div>
-  </div>
+  <label for="valorCobrar">Valor a cobrar do cliente (R$):</label>
+  <input type="text" id="valorCobrar" readonly>
 
-  <script>
-    const tipo = document.getElementById("tipo");
-    const parcelas = document.getElementById("parcelas");
-    const taxa = document.getElementById("taxa");
-    const valorDesejado = document.getElementById("valorDesejado");
-    const valorCobrar = document.getElementById("valorCobrar");
+  <div class="footer">Desenvolvido por Kaialla Requião 💳</div>
+</div>
 
-    const taxasCredito = {
-      1: 2.99,
-      2: 6.01,
-      3: 6.61,
-      4: 7.21,
-      5: 8.01,
-      6: 8.21,
-      7: 8.81,
-      8: 9.01,
-      9: 10.41,
-      10: 10.16,
-      11: 10.71,
-      12: 11.20
-    };
+<script>
+  const tipo = document.getElementById("tipo");
+  const bandeira = document.getElementById("bandeira");
+  const parcelas = document.getElementById("parcelas");
+  const taxa = document.getElementById("taxa");
+  const valorDesejado = document.getElementById("valorDesejado");
+  const valorCobrar = document.getElementById("valorCobrar");
 
-    function atualizarTaxa() {
-      let t = 0;
-      if (tipo.value === "debito") {
-        parcelas.disabled = true;
-        t = 1.19;
-      } else {
-        parcelas.disabled = false;
-        const p = parcelas.value;
-        t = taxasCredito[p] || 0;
+  const taxasPorBandeira = {
+    master: {
+      debito: 1.19,
+      credito: {
+        1: 3.10,
+        2: 6,
+        3: 6.57,
+        4: 7.06,
+        5: 7.95,
+        6: 8.05,
+        7: 8.81,
+        8: 8.92,
+        9: 9.41,
+        10: 10.06,
+        11: 10.71,
+        12: 11.61
       }
-      taxa.value = t.toFixed(2);
-      calcularValorCobrar();
+    },
+    visa: {
+      debito: 1.19,
+      credito: {
+        1: 3.10,
+        2: 6,
+        3: 6.57,
+        4: 7.06,
+        5: 7.95,
+        6: 8.05,
+        7: 8.81,
+        8: 8.92,
+        9: 9.41,
+        10: 10.06,
+        11: 10.71,
+        12: 11.61
+      }
+    },
+    elo: {
+      debito: null,
+      credito: {
+        1: 4,
+        2: 6.79,
+        3: 7.36,
+        4: 7.85,
+        5: 8.74,
+        6: 8.84,
+        7: 9.10,
+        8: 9.21,
+        9: 9.70,
+        10: 10.35,
+        11: 11,
+        12: 11.90
+      }
+    },
+    amex: {
+      debito: null,
+      credito: {
+        1: 4,
+        2: 6.79,
+        3: 7.36,
+        4: 7.85,
+        5: 8.74,
+        6: 8.84,
+        7: 9.10,
+        8: 9.21,
+        9: 9.70,
+        10: 10.35,
+        11: 11,
+        12: 11.90
+      }
+    }
+  };
+
+  function atualizarTaxa() {
+    const b = bandeira.value;
+    const t = tipo.value;
+    const p = parseInt(parcelas.value);
+
+    // Desativa débito se a bandeira não tiver
+    if (taxasPorBandeira[b].debito === null) {
+      tipo.querySelector('option[value="debito"]').disabled = true;
+      tipo.value = "credito";
+    } else {
+      tipo.querySelector('option[value="debito"]').disabled = false;
     }
 
-    function calcularValorCobrar() {
-      const valor = parseFloat(valorDesejado.value);
-      const t = parseFloat(taxa.value);
+    parcelas.disabled = (t === "debito");
 
-      if (!isNaN(valor) && !isNaN(t)) {
-        const valorComTaxa = valor / (1 - (t / 100));
-        valorCobrar.value = valorComTaxa.toFixed(2);
-      } else {
-        valorCobrar.value = "";
-      }
+    let tFinal = 0;
+    if (t === "debito") {
+      tFinal = taxasPorBandeira[b].debito;
+    } else {
+      tFinal = taxasPorBandeira[b].credito[p] || 0;
     }
 
-    tipo.addEventListener("change", atualizarTaxa);
-    parcelas.addEventListener("change", atualizarTaxa);
-    valorDesejado.addEventListener("input", calcularValorCobrar);
+    taxa.value = tFinal.toFixed(2);
+    calcularValorCobrar();
+  }
 
-    atualizarTaxa();
-  </script>
+  function calcularValorCobrar() {
+    const valor = parseFloat(valorDesejado.value);
+    const t = parseFloat(taxa.value);
+    if (!isNaN(valor) && !isNaN(t)) {
+      const valorComTaxa = valor / (1 - (t / 100));
+      valorCobrar.value = valorComTaxa.toFixed(2);
+    } else {
+      valorCobrar.value = "";
+    }
+  }
+
+  bandeira.addEventListener("change", atualizarTaxa);
+  tipo.addEventListener("change", atualizarTaxa);
+  parcelas.addEventListener("change", atualizarTaxa);
+  valorDesejado.addEventListener("input", calcularValorCobrar);
+
+  atualizarTaxa();
+</script>
 
 </body>
 </html>
